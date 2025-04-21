@@ -1132,12 +1132,14 @@
 								$player = mysqli_fetch_row($tmpPlayer);
 								if (!$player) echo mysqli_errno($dbh) . ": " . mysqli_error($dbh) . "\n<br><br>";
                                 echo ('</td><td>');
+								echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
 								echo($player[0]);
 
 								/* black's nick */
 								$tmpPlayer = mysqli_query($dbh, "SELECT CONCAT(nick, ' ', userlevel) as nick FROM " . $CFG_TABLE[players] . " WHERE playerID = ".$tmpGame['blackPlayer']);
 								$player = mysqli_fetch_row($tmpPlayer);
-								echo ("</td><td>");
+								echo ("</a></td><td>");
+								echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
 								echo($player[0]);
 
 								/* Your Color */
@@ -1153,7 +1155,8 @@
 								/* get number of moves from history */
 								$tmpNumMoves = mysqli_query($dbh, "SELECT COUNT(gameID) FROM " . $CFG_TABLE[history] . " WHERE gameID = ".$tmpGame['gameID']);
 								$numMoves = mysqli_fetch_row($tmpNumMoves); $numMoves = $numMoves[0];
-								echo ('</td><td class="numeric">');
+								echo ('</a></td><td class="numeric">');
+								echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
 								echo(floor($numMoves / 2));
 								/* Current Turn */
 								/* based on number of moves, output current color's turn */
@@ -1162,17 +1165,22 @@
 								else
 									$tmpCurMove = "black";
 
-								echo ("</td><td>");
+								echo ("</a></td><td>");
+								echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
 								if ($tmpCurMove == $tmpColor)
 									echo(gettext("Your move"));
 								else
 									echo(gettext("Opponent"));
 
 								/* Start Date */
-								echo ("</td><td>".substr($tmpGame['dateCreated'], 0, -3));
+								echo ("</a></td><td>");
+								echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+								echo (substr($tmpGame['dateCreated'], 0, -3));
 
 								/* Last Move */
-								echo ("</td><td>".substr($tmpGame['lastMove'], 0, -3)."</td></tr>\n");
+								echo ("</a></td><td>");
+								echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+								echo (substr($tmpGame['lastMove'], 0, -3)."</a></td></tr>\n");
 							}
 						}
 					?>
@@ -1356,19 +1364,21 @@
 			$rowNbr++;
 			echo ('<td style="display:none;"></td>');
 			echo('<td>');
-			echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">".$tmpGame['gameID']."</a>");
+			echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">".$tmpGame['gameID']);
 			/* get white's nick */
 			$tmpPlayer = mysqli_query($dbh, "SELECT CONCAT(nick, ' ', userlevel) as nick FROM " . $CFG_TABLE[players] . " WHERE playerID = ".$tmpGame['whitePlayer']);
 			$player = mysqli_fetch_row($tmpPlayer);
             $player = $player[0];
-			echo ('</td><td>');
+			echo ('</a></td><td>');
+			echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
 			echo($player);
 
 			/* black's nick */
 			$tmpPlayer = mysqli_query($dbh, "SELECT CONCAT(nick, ' ', userlevel) as nick FROM " . $CFG_TABLE[players] . " WHERE playerID = ".$tmpGame['blackPlayer']);
 			$player = mysqli_fetch_row($tmpPlayer);
             $player = $player[0];
-			echo ("</td><td>");
+			echo ("</a></td><td>");
+			echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
 			echo($player);
 
 			/* Your Color */
@@ -1385,33 +1395,58 @@
 			$tmpNumMoves = mysqli_query($dbh, "SELECT COUNT(gameID) FROM " . $CFG_TABLE[history] . " WHERE gameID = ".$tmpGame['gameID']);
 			$numMoves = mysqli_fetch_row($tmpNumMoves);
             $numMoves = $numMoves[0];
-			echo ('</td><td class="numeric">');
+			echo ('</a></td><td class="numeric">');
+			echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
 			echo(floor($numMoves / 2));
 			/* Status */
+			echo("</a>");
 			if (is_null($tmpGame['gameMessage']))
 				echo("</td><td>");
 			else
 			{
-				if ($tmpGame['gameMessage'] == "draw")
-					echo("</td><td>&frac12;-&frac12;");
-				else if ($tmpGame['gameMessage'] == "stalemate")
-					echo("</td><td>&frac12;-&frac12; (" . gettext("stalemate") . ")");
-				else if ($tmpGame['gameMessage'] == "playerResigned")
-					echo("</td><td>".gettext($tmpGame['messageFrom'])." " . gettext("resigned"));
-				else if (($mygames != "") && ($tmpGame['gameMessage'] == "checkMate") && ($tmpGame['messageFrom'] == $tmpColor))
-					echo("</td><td>" . gettext("Checkmate, you won!"));
-				else if (($mygames != "") && ($tmpGame['gameMessage'] == "checkMate"))
-					echo("</td><td>" . gettext("Checkmate, you lost"));
-				else if ($tmpGame['gameMessage'] == "checkMate")
-					echo("</td><td>" . gettext("Checkmate, ".$tmpGame['messageFrom']." won!"));
-				else
+				echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+				if ($tmpGame['gameMessage'] == "draw") {
+					echo("</a></td><td>");
+					echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+					echo("&frac12;-&frac12;");
+				}
+				else if ($tmpGame['gameMessage'] == "stalemate") {
 					echo("</td><td>");
+					echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+					echo("&frac12;-&frac12; (" . gettext("stalemate") . ")");
+				}
+				else if ($tmpGame['gameMessage'] == "playerResigned") {
+					echo("</a></td><td>");
+					echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+					echo(gettext($tmpGame['messageFrom'])." " . gettext("resigned"));
+				}
+				else if (($mygames != "") && ($tmpGame['gameMessage'] == "checkMate") && ($tmpGame['messageFrom'] == $tmpColor)) {
+					echo("</a></td><td>");
+					echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+					echo(gettext("Checkmate, you won!"));
+				}
+				else if (($mygames != "") && ($tmpGame['gameMessage'] == "checkMate")) {
+					echo("</a></td><td>");
+					echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+					echo(gettext("Checkmate, you lost"));
+				}
+				else if ($tmpGame['gameMessage'] == "checkMate") {
+					echo("</a></td><td>");
+					echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+					echo(gettext("Checkmate, ".$tmpGame['messageFrom']." won!"));
+				}
+				else
+					echo("</a></td><td>");
 			}
 
 			/* Start Date */
-			echo ("</td><td>".substr($tmpGame['dateCreated'], 0, -3));
+			echo("</td><td>");
+			echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+			echo(substr($tmpGame['dateCreated'], 0, -3));
 			/* Last Move */
-			echo ("</td><td>".substr($tmpGame['lastMove'], 0, -3)."</td></tr>\n");
+			echo("</a></td><td>");
+			echo("<a href=\"javascript:loadGame(".$tmpGame['gameID'].")\">");
+			echo(substr($tmpGame['lastMove'], 0, -3)."</a></td></tr>\n");
 		}
 	}
 ?>
