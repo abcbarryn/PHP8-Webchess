@@ -3,7 +3,7 @@
 
 /*
     This file is part of WebChess. http://webchess.sourceforge.net
-	Copyright 2010 Jonathan Evraire, Rodrigo Flores
+        Copyright 2010 Jonathan Evraire, Rodrigo Flores
 
     WebChess is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,24 +26,26 @@ $f=mysqli_query($dbh, "SELECT * FROM " . $CFG_TABLE[history] . " WHERE ((replace
 
 $c=0;
 $d=0;
+echo("<script>\n");
 echo('var captPieces = [[');
 while($row=mysqli_fetch_array($f, MYSQLI_ASSOC)){
-	if(false !== stripos($row['curColor'], 'white'))
-		$c++;
-	if($c==1){
-		echo"], [";
-		$d = 0;
-	}
-	if($d > 0)
-		echo ', ';
-	$d++;
-	if($row['replaced'] == '')
-		$row['replaced'] = 'pawn';
+        if(false !== stripos($row['curColor'], 'white'))
+                $c++;
+        if($c==1){
+                echo"], [";
+                $d = 0;
+        }
+        if($d > 0)
+                echo ', ';
+        $d++;
+        if($row['replaced'] == '')
+                $row['replaced'] = 'pawn';
 
-	echo "'".$row['replaced']."'";
+        echo "'".$row['replaced']."'";
 
 } // End while
 
 echo "]];\n";
+echo("</script>\n");
 
 ?>
