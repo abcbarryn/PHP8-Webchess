@@ -52,6 +52,8 @@
 
 		/* determine if board is disabled */
 		$isDisabled = isBoardDisabled();
+		if (!isset($isDisabled))
+			$isDisabled=false;
 
 		echo ("var isBoardDisabled = '" . $isDisabled . "';\n");
 		echo ("var isPlayersTurn = '" . $isPlayersTurn . "';\n");
@@ -179,7 +181,7 @@
 
 			$tmpCheck = ($history[$i]['isInCheck'] == 1);
 
-			$moves[$i/2][$i & 1] = moveToPGNString($history[$i]['curColor'], $history[$i]['curPiece'], $history[$i]['fromRow'], $history[$i]['fromCol'], $history[$i]['toRow'], $history[$i]['toCol'], $tmpReplaced, $tmpPromotedTo, $tmpCheck);
+			@$moves[$i/2][$i & 1] = moveToPGNString($history[$i]['curColor'], $history[$i]['curPiece'], $history[$i]['fromRow'], $history[$i]['fromCol'], $history[$i]['toRow'], $history[$i]['toCol'], $tmpReplaced, $tmpPromotedTo, $tmpCheck);
 		}
 
 		return $moves;
@@ -203,7 +205,7 @@
 		}
 
 		$comma = '';
-		echo("var moves = [");
+		echo("<script>\nvar moves = [");
 		for ($i = 0; $i < count($moves); $i++)
 		{
 			echo($comma);
@@ -216,7 +218,7 @@
 			echo ("['" . $moves[$i][0]."', '".$moves2."']");
 			$comma = ', ';
 		}
-		echo("];\n");
+		echo("];\n</script>\n");
 	}
 
 	function writeStatus()
@@ -236,10 +238,11 @@
 			echo("var whosMove = 'Opponent\'s Turn';\n");
 
 		echo("var checkMsg = '");
-		if (!$isCheckMate && ($history[$numMoves]['isInCheck'] == 1))
-			echo($curColor." is currently in check!");
+		if (!is_null($history))
+			if (!$isCheckMate && ($history[$numMoves]['isInCheck'] == 1))
+				echo($curColor." is currently in check!");
 		echo("';\n");
-		echo("var statusMessage = '".$statusMessage."';\n");
+		echo("var statusMessage = '".$statusMessage."';\n</script>\n");
 	}
 
 	function writePromotion()

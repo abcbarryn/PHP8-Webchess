@@ -109,15 +109,27 @@
 			$_SESSION['playerID'] = mysqli_insert_id($dbh);
 
 			/* set History format preference */
-			$tmpQuery = "INSERT INTO " . $CFG_TABLE[preferences] . " (playerID, preference, value) VALUES (".$_SESSION['playerID'].", 'history', '".isset($_POST['rdoHistory'])?$_POST['rdoHistory']:''."')";
+			if (isset($_POST['rdoHistory']))
+				$rdoHistory=$_POST['rdoHistory'];
+			else
+				$rdoHistory='';
+			$tmpQuery = "INSERT INTO " . $CFG_TABLE[preferences] . " (playerID, preference, value) VALUES (".$_SESSION['playerID'].", 'history', '".$rdoHistory."')";
 			mysqli_query($dbh, $tmpQuery);
 
 			/* set History layout preference */
-			$tmpQuery = "INSERT INTO " . $CFG_TABLE[preferences] . " (playerID, preference, value) VALUES (".$_SESSION['playerID'].", 'historylayout', '".isset($_POST['rdoHistorylayout'])?$_POST['rdoHistorylayout']:''."')";
+			if (isset($_POST['rdoHistorylayout']))
+				$rdoHistorylayout=$_POST['rdoHistorylayout'];
+			else
+				$rdoHistorylayout='';
+			$tmpQuery = "INSERT INTO " . $CFG_TABLE[preferences] . " (playerID, preference, value) VALUES (".$_SESSION['playerID'].", 'historylayout', '".$rdoHistorylayout."')";
 			mysqli_query($dbh, $tmpQuery);
 
 			/* set Theme preference */
-			$tmpQuery = "INSERT INTO " . $CFG_TABLE[preferences] . " (playerID, preference, value) VALUES (".$_SESSION['playerID'].", 'theme', '".isset($_POST['rdoTheme'])?$_POST['rdoTheme']:''."')";
+			if (isset($_POST['rdoTheme']))
+				$rdoTheme=$_POST['rdoTheme'];
+			else
+				$rdoTheme='';
+			$tmpQuery = "INSERT INTO " . $CFG_TABLE[preferences] . " (playerID, preference, value) VALUES (".$_SESSION['playerID'].", 'theme', '".$rdoTheme."')";
 			mysqli_query($dbh, $tmpQuery);
 
             /* set Theme preference */
