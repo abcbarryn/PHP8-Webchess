@@ -328,6 +328,9 @@ msgstr "GNU Chess Einfache"
 msgid "Master"
 msgstr "Master"
 
+msgid "Photo"
+msgstr "Foto"
+
 #: C:\projects\chess\webchess/mainmenu.php:739
 #: C:\projects\chess\webchess/newuser.php:115
 msgid "Auto-reload"
