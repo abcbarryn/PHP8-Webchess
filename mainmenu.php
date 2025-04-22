@@ -704,6 +704,7 @@
 						if ($_SESSION['pref_theme'] == 'master')
 						{
 					?>
+							<option value="photo"><?php echo gettext("Photo");?></option>
 							<option value="beholder"><?php echo gettext("Beholder");?></option>
 							<option value="gnuchess_fancy"><?php echo gettext("GNU Chess Fancy");?></option>
 							<option value="gnuchess_simple"><?php echo gettext("GNU Chess Simple");?></option>
@@ -713,6 +714,7 @@
 						elseif ($_SESSION['pref_theme'] == 'beholder')
 						{
 					?>
+							<option value="photo"><?php echo gettext("Photo");?></option>
 							<option value="beholder" selected="selected"><?php echo gettext("Beholder");?></option>
 							<option value="gnuchess_fancy"><?php echo gettext("GNU Chess Fancy");?></option>
 							<option value="gnuchess_simple"><?php echo gettext("GNU Chess Simple");?></option>
@@ -722,6 +724,7 @@
 						elseif ($_SESSION['pref_theme'] == 'gnuchess_fancy')
 						{
 					?>
+							<option value="photo"><?php echo gettext("Photo");?></option>
 							<option value="beholder"><?php echo gettext("Beholder");?></option>
 							<option value="gnuchess_fancy" selected="selected"><?php echo gettext("GNU Chess Fancy");?></option>
 							<option value="gnuchess_simple"><?php echo gettext("GNU Chess Simple");?></option>
@@ -731,6 +734,7 @@
 						else
 						{
 					?>
+							<option value="photo"><?php echo gettext("Photo");?></option>
 							<option value="beholder"><?php echo gettext("Beholder");?></option>
 							<option value="gnuchess_fancy"><?php echo gettext("GNU Chess Fancy");?></option>
 							<option value="gnuchess_simple" selected="selected"><?php echo gettext("GNU Chess Simple");?></option>
@@ -740,10 +744,11 @@
 					</select></div>
 					<div class="inputlabel">
 					<table>
-					<tr><td>Beholder</td><td><img src="images/beholder/white_king.png" alt="King" /></td><td><img src="images/beholder/white_knight.png" alt="Knight" /></td><td><img src="images/beholder/white_pawn.png" alt="Pawn" /></td></tr>
-					<tr><td>GNU Chess Fancy</td><td><img src="images/gnuchess_fancy/white_king.png" alt="King" /></td><td><img src="images/gnuchess_fancy/white_knight.png" alt="Knight" /></td><td><img src="images/gnuchess_fancy/white_pawn.png" alt="Pawn" /></td></tr>
-					<tr><td>GNU Chess Simple</td><td><img src="images/gnuchess_simple/white_king.png" alt="King" /></td><td><img src="images/gnuchess_simple/white_knight.png" alt="Knight" /></td><td><img src="images/gnuchess_simple/white_pawn.png" alt="Pawn" /></td></tr>
-					<tr><td>Master</td><td><img src="images/master/white_king.png" alt="King" /></td><td><img src="images/master/white_knight.png" alt="Knight" /></td><td><img src="images/master/white_pawn.png" alt="Pawn" /></td></tr>
+					<tr><td><?php echo gettext("Photo");?></td><td><img src="images/photo/white_king.png" alt="King" /></td><td><img src="images/photo/white_knight.png" alt="Knight" /></td><td><img src="images/photo/white_pawn.png" alt="Pawn" /></td></tr>
+					<tr><td><?php echo gettext("Beholder");?></td><td><img src="images/beholder/white_king.png" alt="King" /></td><td><img src="images/beholder/white_knight.png" alt="Knight" /></td><td><img src="images/beholder/white_pawn.png" alt="Pawn" /></td></tr>
+					<tr><td><?php echo gettext("GNU Chess Fancy");?></td><td><img src="images/gnuchess_fancy/white_king.png" alt="King" /></td><td><img src="images/gnuchess_fancy/white_knight.png" alt="Knight" /></td><td><img src="images/gnuchess_fancy/white_pawn.png" alt="Pawn" /></td></tr>
+					<tr><td><?php echo gettext("GNU Chess Simple");?></td><td><img src="images/gnuchess_simple/white_king.png" alt="King" /></td><td><img src="images/gnuchess_simple/white_knight.png" alt="Knight" /></td><td><img src="images/gnuchess_simple/white_pawn.png" alt="Pawn" /></td></tr>
+					<tr><td><?php echo gettext("Master");?></td><td><img src="images/master/white_king.png" alt="King" /></td><td><img src="images/master/white_knight.png" alt="Knight" /></td><td><img src="images/master/white_pawn.png" alt="Pawn" /></td></tr>
 					</table>
 					</div>
 					<br/>

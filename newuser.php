@@ -107,6 +107,7 @@
                                         <div class="inputlabel"><?php echo gettext("Theme");?></div>
 					<div class="inputbox">
                                                 <div><input name="rdoTheme" type="radio" value="beholder" checked="checked" /> <a href="http://www.beholder.co.uk"><?php echo gettext("Beholder");?></a></div>
+                                                <div><input name="rdoTheme" type="radio" value="photo" /> <?php echo gettext("Photo");?></div>
                                                 <div><input name="rdoTheme" type="radio" value="plain" /> <?php echo gettext("Plain");?></div>
 					</div>
                                         <div class="inputlabel"><?php echo gettext("Auto-reload") . " (" . gettext("min:") . ($CFG_MINAUTORELOAD) . " " . gettext("secs") . ")";?></div>
